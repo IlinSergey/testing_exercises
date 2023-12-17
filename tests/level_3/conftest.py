@@ -135,3 +135,21 @@ def expenses_list() -> list[Expense]:
                     card=BankCard(last_digits='1234', owner='John Doe'),
                     spent_in='zoom.us', spent_at=datetime.datetime(2023, 12, 7, 17, 53, 28, 127785),
                     category=ExpenseCategory.ONLINE_SUBSCRIPTIONS)]
+
+
+@pytest.fixture
+def expenses_list_fabric():
+    def make_expenses_list(arguments: list[tuple]) -> list[Expense]:
+        result = [Expense(amount=argument[0],
+                          currency=argument[1],
+                          card=argument[2],
+                          spent_in=argument[3],
+                          spent_at=argument[4],
+                          category=argument[5]) for argument in arguments]
+        return result
+    return make_expenses_list
+
+
+@pytest.fixture
+def get_card() -> BankCard:
+    return BankCard(last_digits='1234', owner='John Doe')
