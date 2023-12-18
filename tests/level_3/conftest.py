@@ -1,5 +1,6 @@
 import datetime
 from decimal import Decimal
+from typing import TypedDict
 
 import pytest
 
@@ -142,14 +143,23 @@ def expenses_list(get_card) -> list[Expense]:
                     category=ExpenseCategory.ONLINE_SUBSCRIPTIONS)]
 
 
+class Arguments(TypedDict):
+    amount: Decimal
+    currency: Currency
+    card: BankCard
+    spent_in: str
+    spent_at: datetime.datetime
+    catecory: ExpenseCategory
+
+
 @pytest.fixture
 def expenses_list_fabric():
-    def make_expenses_list(arguments: list[tuple]) -> list[Expense]:
-        result = [Expense(amount=argument[0],
-                          currency=argument[1],
-                          card=argument[2],
-                          spent_in=argument[3],
-                          spent_at=argument[4],
-                          category=argument[5]) for argument in arguments]
+    def make_expenses_list(arguments: list[Arguments]) -> list[Expense]:
+        result = [Expense(amount=argument['amount'],
+                          currency=argument['currency'],
+                          card=argument['card'],
+                          spent_in=argument['spent_in'],
+                          spent_at=argument['spent_at'],
+                          category=argument['category']) for argument in arguments]
         return result
     return make_expenses_list
