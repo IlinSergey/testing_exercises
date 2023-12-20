@@ -29,5 +29,5 @@ big_title = "Lorem Ipsum is simply dummy text of the printing and typesetting in
     ('Copy of Some title', 'Copy of Some title (2)'),
     (big_title, big_title),
 ])
-def test_change_copy_item_with_default_max_lenght(title, expected_result):
+def test__change_copy_item__with_default_max_lenght(title, expected_result):
     assert change_copy_item(title=title) == expected_result

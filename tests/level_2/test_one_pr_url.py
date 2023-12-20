@@ -6,7 +6,7 @@ from functions.level_2.one_pr_url import is_github_pull_request_url
 def test__is_github_pull_request_url__succes():
     correct_url = 'https://github.com/user/some_repository/pull/1'
     result = is_github_pull_request_url(correct_url)
-    assert result == True
+    assert result is True
 
 
 @pytest.mark.parametrize('url, expected_result', [
