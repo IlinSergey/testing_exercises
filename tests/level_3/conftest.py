@@ -1,8 +1,8 @@
 import datetime
 from decimal import Decimal
-from typing import TypedDict
 
 import pytest
+from custom_types import Arguments
 
 from functions.level_3.models import (BankCard, Currency, Expense,
                                       ExpenseCategory)
@@ -141,15 +141,6 @@ def expenses_list(get_card) -> list[Expense]:
                     card=get_card,
                     spent_in='zoom.us', spent_at=datetime.datetime(2023, 12, 7, 17, 53, 28, 127785),
                     category=ExpenseCategory.ONLINE_SUBSCRIPTIONS)]
-
-
-class Arguments(TypedDict):
-    amount: Decimal
-    currency: Currency
-    card: BankCard
-    spent_in: str
-    spent_at: datetime.datetime
-    catecory: ExpenseCategory
 
 
 @pytest.fixture
