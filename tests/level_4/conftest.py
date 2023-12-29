@@ -1,3 +1,4 @@
+import configparser
 import os
 
 import pytest
@@ -22,5 +23,24 @@ def filepath(request):
         file.writelines([f'{line}\n' for line in lines])
 
     yield path_to_file, expected_result
+
+    os.remove(path_to_file)
+
+
+@pytest.fixture
+def config_file_path(request):
+    data, field_name, expected_result = request.param
+    config = configparser.ConfigParser()
+    path_to_file = 'config.ini'
+
+    for section, section_data in data.items():
+        config.add_section(section)
+        for field, value in section_data.items():
+            config.set(section, field, value)
+
+    with open(path_to_file, 'w') as config_file:
+        config.write(config_file)
+
+    yield path_to_file, field_name, expected_result
 
     os.remove(path_to_file)
