@@ -1,7 +1,7 @@
 import datetime
 from decimal import Decimal
 
-from conftest import Arguments
+from custom_types import Arguments
 
 from functions.level_3.models import Currency, ExpenseCategory
 from functions.level_3.one_avg_daily_expenses import \

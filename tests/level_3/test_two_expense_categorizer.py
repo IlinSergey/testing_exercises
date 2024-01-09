@@ -2,8 +2,7 @@ import datetime
 from decimal import Decimal
 
 import pytest
-
-from conftest import Arguments
+from custom_types import Arguments
 
 from functions.level_3.models import BankCard, Currency, ExpenseCategory
 from functions.level_3.two_expense_categorizer import guess_expense_category
